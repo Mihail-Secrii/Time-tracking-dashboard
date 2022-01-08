@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+	<title>Frontend Mentor | Time tracking dashboard</title>
+</head>
+<body>
+	<main>
+		<div class="menu">
+			<div class="top-menu">
+				<img src="images/image-jeremy.png" alt="Image avatar"><br>
+				<div>
+					<span>Report for</span>
+					<h1>Jeremy Robson</h1>
+				</div>
+			</div>
+			<div class="bottom-menu" id="menu">
+				<p class="btn" onclick="numberShow(0)">Daily</p>
+				<p class="btn active" onclick="numberShow(1)">Weekly</p>
+				<p class="btn" onclick="numberShow(2)">Monthly</p>
+			</div>
+		</div>
+
+		<div class="info">
+			<div class="col-50 work">
+				<div class="bottom">
+					<p>Work <img src="images/icon-ellipsis.svg" alt="Icon setting"></p>
+					<div>
+						<h1><span id="num0">0</span>hrs</h1>
+						<p>Last Week - <span id="num1">0</span>hrs</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-50 play">
+				<div class="bottom">
+					<p>Play <img src="images/icon-ellipsis.svg" alt="Icon setting"></p>
+					<div>
+						<h1><span id="num2">0</span>hrs</h1>
+						<p>Last Week - <span id="num3">0</span>hrs</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-50 study">
+				<div class="bottom">
+					<p>Study <img src="images/icon-ellipsis.svg" alt="Icon setting"></p>
+					<div>
+						<h1><span id="num4">0</span>hrs</h1>
+						<p>Last Week - <span id="num5">0</span>hrs</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-50 exercise">
+				<div class="bottom">
+					<p>Exercise <img src="images/icon-ellipsis.svg" alt="Icon setting"></p>
+					<div>
+						<h1><span id="num6">0</span>hrs</h1>
+						<p>Last Week - <span id="num7">0</span>hrs</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-50 social">
+				<div class="bottom">
+					<p>Social <img src="images/icon-ellipsis.svg" alt="Icon setting"></p>
+					<div>
+						<h1><span id="num8">0</span>hrs</h1>
+						<p>Last Week - <span id="num9">0</span>hrs</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-50 self-care">
+				<div class="bottom">
+					<p>Self Care <img src="images/icon-ellipsis.svg" alt="Icon setting"></p>
+					<div>
+						<h1><span id="num10">0</span>hrs</h1>
+						<p>Last Week - <span id="num11">0</span>hrs</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<script type="text/javascript">
+		var header = document.getElementById("menu");
+		var btns = header.getElementsByClassName("btn");
+		for (var i = 0; i < btns.length; i++) {
+			btns[i].addEventListener("click", function() {
+				var current = document.getElementsByClassName("active");
+				current[0].className = current[0].className.replace(" active", "");
+				this.className += " active";
+			});
+		}
+
+		var array = [
+		[5, 7, 1, 2, 0, 1, 1, 1, 1, 3, 0, 1],
+		[32, 36, 10, 8, 4, 7, 4, 5, 5, 10, 2, 2],
+		[103, 128, 23, 29, 13, 19, 11, 18, 21, 23, 7, 11]
+		];
+
+		var number = "num";
+
+		numberShow(1);
+
+		function numberShow(n){
+			for(var i = 0; i < array[0].length; i++){
+				var num = document.getElementById("num"+i);
+				var current = num.innerHTML;
+				var future = array[n][i];
+				functionBeforeNumberChange(num, current, future);;
+			}
+		}
+
+		function functionBeforeNumberChange(num, currentN, futureN){
+			
+			var interval = setInterval(functionNumberChange, 10);
+			function functionNumberChange(){
+				if(currentN != futureN){
+					if(currentN < futureN){
+						currentN ++;
+					}else{
+						currentN --;
+					}
+					num.innerHTML = currentN;
+				}
+			}
+		}
+
+	</script>
+</body>
+</html>
